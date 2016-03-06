@@ -47,6 +47,13 @@ set_source_files_properties(${LAUNCH} PROPERTIES HEADER_FILE_ONLY TRUE)
 #########################################################
 
 #########################################################
+# OTHER FILES
+# Adding other files to project source, without compiling them
+file(GLOB_RECURSE OTHER . *.md)
+set_source_files_properties(${OTHER} PROPERTIES HEADER_FILE_ONLY TRUE)
+#########################################################
+
+#########################################################
 #CATKIN
 find_package(catkin REQUIRED COMPONENTS
   roscpp
@@ -77,6 +84,7 @@ add_executable(
     ${ULTRASND_SRC}
     ${MSG}
     ${LAUNCH}
+    ${OTHER}
 )
 
 target_link_libraries(
