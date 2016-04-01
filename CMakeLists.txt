@@ -57,7 +57,6 @@ set_source_files_properties(${OTHER} PROPERTIES HEADER_FILE_ONLY TRUE)
 #CATKIN
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  serial
   std_msgs
   sensor_msgs
   ros_ultrasonic_bumper
@@ -65,7 +64,6 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package(
   CATKIN_DEPENDS
-    serial
     std_msgs
     sensor_msgs
     geometry_msgs

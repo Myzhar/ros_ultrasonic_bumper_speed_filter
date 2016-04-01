@@ -1,5 +1,4 @@
 #include <ros/ros.h>
-#include <serial/serial.h>
 #include <stdlib.h>
 #include <string>
 
@@ -30,16 +29,16 @@ void do_filtering();
 ros::NodeHandle* nh;
 ros::NodeHandle* nhPriv;
 
-float stop_range;
-float secure_range;
+double stop_range;
+double secure_range;
 
 bool new_twist;
 bool new_ranges;
 
-float fw_speed;
-float rot_speed;
+double fw_speed;
+double rot_speed;
 
-float dist[MAX_RANGES];
+double dist[MAX_RANGES];
 
 ros::Publisher twist_filt_pub;
 // <<<<< Global variables
@@ -140,11 +139,11 @@ void do_filtering()
 {
     if( new_twist && new_ranges )
     {
-        float range_left;
-        float range_right;
+        double range_left;
+        double range_right;
 
-        float fw_filtered;
-        float rot_filtered;
+        double fw_filtered;
+        double rot_filtered;
 
         // >>>>> Robot is going forward or backward?
         if( fw_speed >= 0 )
@@ -164,7 +163,7 @@ void do_filtering()
         // >>>>> Filtering forward speed
 
         // We take the minimum range measured by the two front sensor
-        float ref_range = std::min( range_left, range_right );
+        double ref_range = std::min( range_left, range_right );
 
         if( ref_range > secure_range )
         {
@@ -176,13 +175,13 @@ void do_filtering()
         }
         else
         {
-            float factor = (ref_range-stop_range)/(secure_range-stop_range);
+            double factor = (ref_range-stop_range)/(secure_range-stop_range);
             fw_filtered = factor*fw_speed;
         }
         // <<<<< Filtering forward speed
 
         // >>>>> Filtering rotation speed
-        float rot_sign;
+        double rot_sign;
 
         if( ref_range < stop_range )
         {
